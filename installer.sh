@@ -9,6 +9,8 @@ OSTYPE=$(uname -m)
 USER="node-exporter"
 NAME="node_exporter"
 
+adduser --home /opt/$NAME --shell /sbin/nologin --disabled-password $USER
+
 if [ "${OSTYPE}" = "x86_64" ]; then
     BIN="amd64"
 else
@@ -175,7 +177,7 @@ ARGS=""
 #                            "logger:stdout?json=true"
 EOF
 
-adduser -r -d /opt/$NAME $USER -s /sbin/nologin
+# adduser -r -d /opt/$NAME $USER -s /sbin/nologin
 chown -R $USER:$USER /opt/$NAME
 
 systemctl enable $NAME
